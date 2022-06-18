@@ -24,7 +24,7 @@ func (user *Users) UpdateUser(email string) error {
 	return nil
 }
 
-func (user *Users) DeleleUser() error {
+func (user *Users) DeleteUser() error {
 	if err := config.DB.Delete(user).Error; err != nil {
 		return err
 	}
@@ -33,7 +33,7 @@ func (user *Users) DeleleUser() error {
 
 func GetOneByEmail(email string) (Users, error) {
 	var user Users
-	result := config.DB.Where("email= ", email).First(&user)
+	result := config.DB.Where("email= ?", email).First(&user)
 	return user, result.Error
 }
 func GetAll(keywords string) ([]Users, error) {
